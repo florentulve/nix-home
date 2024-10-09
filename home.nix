@@ -17,23 +17,27 @@
   
   fonts.fontconfig.enable = true;
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
   home.packages = with pkgs; [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
     hello
     devbox
     chezmoi
     mise
+    usage
     rclone
     just
+    dive
+    grype
+    syft
+    nodejs_22
+    jdk22
+    distrobox
+    go-task
+    just
+    meld
+    jq
+    cheat
+    tldr
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    #(nerdfonts.override { fonts = [ "FantasqueSansMono" "DroidSansMono" "FiraCode" "JetBrainsMono" "UbuntuMono" "IosevkaTerm" "Hack" "SauceCodePro" "AzeretMono" ]; })
     (nerdfonts.override { fonts = [ "FantasqueSansMono" "FiraCode" "DroidSansMono" "JetBrainsMono" "Hack" "UbuntuMono" "IosevkaTerm" ]; })
 
     # # You can also create simple shell scripts directly inside your
@@ -102,8 +106,6 @@
   
   programs.starship = {
     enable = true;
-
-    # Configuration écrite dans ~/.config/starship.toml
     settings = (builtins.fromTOML (builtins.readFile ./starship.toml));
   };
 }
