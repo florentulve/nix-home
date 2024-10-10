@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -37,6 +37,9 @@
     jq
     cheat
     tldr
+    starship
+    lazygit
+    gum
 
     (nerdfonts.override { fonts = [ "FantasqueSansMono" "FiraCode" "DroidSansMono" "JetBrainsMono" "Hack" "UbuntuMono" "IosevkaTerm" ]; })
 
@@ -83,6 +86,14 @@
     # EDITOR = "emacs";
   };
 
+  home.activation.chezmoi-dotfiles = lib.hm.dag.entryAfter [ "installPackages" ] ''
+    #echo -e "\033[0;34mActivating chezmoi"
+    #echo -e "\033[0;34m=================="
+    echo "${config.home.path}"
+    PATH="${config.home.path}/bin:/usr/bin/:$PATH" $DRY_RUN_CMD ${pkgs.chezmoi}/bin/chezmoi init --apply --force --verbose -S ${config.home.homeDirectory}/Documents/Sync/Workspace/chezmoi
+    #echo -e "\033[0;34m=================="
+  '';
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -98,14 +109,5 @@
         ];
       };
     };
-  };
-
-  programs.lazygit = {
-    enable = true;
-  };
-  
-  programs.starship = {
-    enable = true;
-    settings = (builtins.fromTOML (builtins.readFile ./starship.toml));
   };
 }
