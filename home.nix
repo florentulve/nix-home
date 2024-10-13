@@ -30,7 +30,7 @@
     syft
     nodejs_22
     jdk22
-    distrobox
+    #distrobox
     go-task
     just
     meld
