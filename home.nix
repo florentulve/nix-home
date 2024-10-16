@@ -1,6 +1,7 @@
 { config, pkgs, lib, extraSpecialArgs, ... }:
 
 {
+  
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "flo";
@@ -30,17 +31,24 @@
     syft
     nodejs_22
     jdk22
-    #distrobox
+    #distrobox #broken mount /nix
     go-task
     just
-    meld
     jq
     cheat
     tldr
     starship
     lazygit
     gum
-    fenix.complete.toolchain
+    delta
+    atuin
+    kubectl
+    krew
+    k9s
+    kubescape
+    kubectl
+    krew
+    fenix.stable.completeToolchain
 
     (nerdfonts.override { fonts = [ "FantasqueSansMono" "FiraCode" "DroidSansMono" "JetBrainsMono" "Hack" "UbuntuMono" "IosevkaTerm" ]; })
 
@@ -110,5 +118,18 @@
         ];
       };
     };
+  };
+
+  programs.krewfile = {
+    enable = true;
+    upgrade = true;
+    krewPackage = pkgs.krew;
+    plugins = [
+      "kc"
+      "oidc-login"
+      "access-matrix"
+      "ns"
+      "popeye"
+    ];
   };
 }

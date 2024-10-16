@@ -11,15 +11,19 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    krewfile = {
+      url = "github:brumhard/krewfile";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, fenix, ... }:
+  outputs = { nixpkgs, home-manager, krewfile, fenix, ... }:
     let
       system = "x86_64-linux";
       #pkgs = nixpkgs.legacyPackages.${system};
       pkgs = import nixpkgs{
         inherit system;
-        overlays = [ fenix.overlays.default ];
+        overlays = [ fenix.overlays.default];
       };
     in {
       #nixpkgs.overlays = [ fenix.overlays.default ];
@@ -27,6 +31,7 @@
         inherit pkgs;
         modules = [
           ./home.nix
+          krewfile.homeManagerModules.default
         ];
       };
     };
