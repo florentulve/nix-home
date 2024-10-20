@@ -45,9 +45,13 @@
     kubectl
     krew
     k9s
+    k3d
+    kind
+    minikube
     kubescape
     kubectl
     krew
+    zellij
     fenix.stable.completeToolchain
 
     (nerdfonts.override { fonts = [ "FantasqueSansMono" "FiraCode" "DroidSansMono" "JetBrainsMono" "Hack" "UbuntuMono" "IosevkaTerm" ]; })
@@ -130,6 +134,10 @@
       "access-matrix"
       "ns"
       "popeye"
+      "neat"
+      "sniff"
+      "outdated"
+      "who-can"
     ];
   };
 }
